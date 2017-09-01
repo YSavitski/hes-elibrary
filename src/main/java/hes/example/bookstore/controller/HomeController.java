@@ -1,0 +1,36 @@
+package hes.example.bookstore.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class HomeController {
+    @RequestMapping("/")
+    public String index(){
+        return "index";
+    }
+
+    /*@RequestMapping("/myAccount")
+    public String myAccount(){
+        return "myAccount";
+    }*/
+
+    @RequestMapping(value = "/login")
+    public String login(Model model){
+        model.addAttribute("classActiveLogin", true);
+        return "myAccount";
+    }
+
+    @RequestMapping(value = "/forgetPassword")
+    public String ForgetPassword(Model model){
+        model.addAttribute("classActiveForgetPassword", true);
+        return "myAccount";
+    }
+
+    @RequestMapping(value = "/newUser")
+    public String newUser(Model model){
+        model.addAttribute("classActiveNewUser", true);
+        return "myAccount";
+    }
+}
