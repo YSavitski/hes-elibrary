@@ -30,21 +30,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return SecurityUtility.passwordEncoder();
     }
 
-    private static final String[] PUBLIC_MATHERS = {
+    private static final String[] PUBLIC_MATCHERS = {
             "/css/**",
             "/js/**",
             "/images/**",
             "/",
             "/home",
             "/newUser",
-            "/forgetPassword"
+            "/forgetPassword",
+            "/login"
     };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(PUBLIC_MATHERS).permitAll()
-                .and()
+                .antMatchers(PUBLIC_MATCHERS).permitAll();
+
+        http
                 .csrf().disable().cors().disable()
                 .formLogin().failureUrl("/login?error").defaultSuccessUrl("/")
                 .loginPage("/login").permitAll()

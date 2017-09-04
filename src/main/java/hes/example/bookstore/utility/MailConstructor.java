@@ -17,10 +17,10 @@ public class MailConstructor {
             String contextPath, Locale locale, String token, User user, String password) {
         String url = contextPath + "/newUser?token=" + token;
         String message = ("\nPlease click on this link to verify your email and edit your personal information." +
-                " Your password is: \n").concat(password);
+                "\nYour password is: ").concat(password);
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(user.getEmail());
-        email.setSubject("Le's Bookstore - New User");
+        email.setSubject("Le's Bookstore - User Credentials");
         email.setText(url+message);
         email.setFrom(environment.getProperty("support.email"));
         return email;
