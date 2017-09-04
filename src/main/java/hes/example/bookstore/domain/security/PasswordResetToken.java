@@ -2,6 +2,7 @@ package hes.example.bookstore.domain.security;
 
 import hes.example.bookstore.domain.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
@@ -17,15 +18,13 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Getter @Setter @ToString
+@Getter @Setter @ToString @NoArgsConstructor
 public class PasswordResetToken {
     private static final int EXPIRATION = 60*24;
 
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(name = "user_id", columnDefinition = "CHAR(32)", updatable = false)
     @Id
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String token;
 

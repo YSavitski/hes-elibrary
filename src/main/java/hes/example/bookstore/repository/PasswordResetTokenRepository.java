@@ -12,7 +12,7 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 @Repository
-public interface PasswordResetTokenRepository extends JpaRepository<PasswordResetToken, UUID> {
+public interface PasswordResetTokenRepository extends JpaRepository<PasswordResetToken, Long> {
     PasswordResetToken findByToken(String token);
 
     PasswordResetToken findByUser(User user);

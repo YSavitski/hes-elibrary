@@ -72,7 +72,7 @@ public class HomeController {
             @ModelAttribute("username") String username,
             Model model
     ){
-        model.addAttribute("classActiveNewAccount", true);
+        model.addAttribute("classActiveNewUser", true);
         model.addAttribute("email", userEmail);
         model.addAttribute("username", username);
 
@@ -141,6 +141,7 @@ public class HomeController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         model.addAttribute("classActiveEdit", true);
+        model.addAttribute("user", user);
         return "myProfile";
     }
 }
