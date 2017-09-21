@@ -60,6 +60,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Shopping Cart</a></li>
+                    <li><a sec:authorize="hasRole('ADMIN')" th:href="@{/adminportal/}">Admin Portal</a></li>
                     <li><a sec:authorize="isAnonymous()" th:href="@{/login}">My Account</a></li>
                     <li><a sec:authorize="isAuthenticated()" th:href="@{/myProfile}">My Account</a></li>
                     <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a></li>

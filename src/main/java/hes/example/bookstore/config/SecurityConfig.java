@@ -5,6 +5,7 @@ import hes.example.bookstore.utility.SecurityUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -17,6 +18,7 @@ import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 
 @Configuration
+@Order(1)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -44,7 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(PUBLIC_MATCHERS).permitAll();
+                .antMatchers(PUBLIC_MATCHERS).permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/adminportal/**").hasRole("ADMIN");
 
         http
                 .csrf().disable().cors().disable()
@@ -55,6 +59,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/?logout").deleteCookies("remember-me").permitAll()
                 .and()
                 .rememberMe();
+
+        /*http
+                .formLogin().loginPage("/adminportal/login")
+                .failureUrl("/adminportal/login?error").defaultSuccessUrl("/adminportal/").permitAll()
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/adminportal/logout"))
+                .logoutSuccessUrl("/adminportal/?logout").deleteCookies("remember-me").permitAll()
+                .and()
+                .rememberMe();*/
     }
 
     @Autowired
