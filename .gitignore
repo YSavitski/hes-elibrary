@@ -23,3 +23,5 @@ dist/
 nbdist/
 .nb-gradle/
 /classes/
+
+/src/book_sources

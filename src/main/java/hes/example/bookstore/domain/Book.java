@@ -1,14 +1,14 @@
 package hes.example.bookstore.domain;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -17,13 +17,16 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "books")
-@Getter @Setter @NoArgsConstructor
+@Data
+@NoArgsConstructor
 public class Book {
     @Id
+    /*@GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;*/
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(name = "book_id", columnDefinition = "CHAR(32)")
-    private UUID id;
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name = "book_id")
+    private String id;
     private String title;
 
     @Column(columnDefinition = "text")
