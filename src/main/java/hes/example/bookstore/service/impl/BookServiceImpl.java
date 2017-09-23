@@ -13,6 +13,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service("bookService")
@@ -26,11 +29,29 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book save(Book book) {
+        if(!book.getBookImage().isEmpty()){
+            book.setHasImage(true);
+        }
         return bookRepository.save(book);
     }
 
+    private void checkDirectories(String bookId){
+        Path pathToBookDirectory = Paths.get(bookContentStorePath);
+        if(Files.notExists(pathToBookDirectory)){
+            try {
+                Files.createDirectories(pathToBookDirectory);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
-    public void saveBookImage(MultipartFile file, String imageName) {
+    public void saveBookImage(MultipartFile file, String bookId) {
+
+        checkDirectories(bookId);
+        String imageName = bookId.concat(".png");
+
         try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(
                 new File(bookContentStorePath.concat(imageName))))) {
             byte[] bytes = file.getBytes();

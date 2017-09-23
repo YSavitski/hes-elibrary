@@ -2,11 +2,44 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="common/admportal-header :: common-header"></th:block>
+    <!-- Bootstrap core CSS -->
+    <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
 </head>
 
 <body>
     <th:block th:include="common/admportal-header :: navbar"></th:block>
-    <h1>Book List Page</h1>
+
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>List Price</th>
+                        <th>Our Price</th>
+                        <th>Active?</th>
+                        <th>Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-th-each="book : ${books}">
+                        <td hidden="hidden"><input name="id" th:value="${book.id}"/></td>
+                        <td th:text="${book.title}"></td>
+                        <td th:text="${book.author}"></td>
+                        <td th:text="${book.category}"></td>
+                        <td th:text="${book.listPrice}"></td>
+                        <td th:text="${book.ourPrice}"></td>
+                        <td th:text="${book.active}"></td>
+                        <td><button class="btn btn-danger">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <th:block th:include="common/admportal-header :: body-bottom-scripts"></th:block>
 </body>
 </html>

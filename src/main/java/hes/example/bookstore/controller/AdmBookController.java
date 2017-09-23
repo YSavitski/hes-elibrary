@@ -28,6 +28,7 @@ public class AdmBookController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String getAllBooks(Model model){
         List<Book> books = bookService.findAllBooks();
+        model.addAttribute("books", books);
         return "bookList";
     }
 
@@ -44,8 +45,9 @@ public class AdmBookController {
             HttpServletRequest request)
     {
         bookService.save(book);
-        String imageName = book.getId().toString().concat(".png");
-        bookService.saveBookImage(book.getBookImage(), imageName);
+        if(!book.getBookImage().isEmpty()){
+            bookService.saveBookImage(book.getBookImage(), book.getId());
+        }
         return "redirect:/adminportal/books";
     }
 }

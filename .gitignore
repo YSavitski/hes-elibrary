@@ -24,4 +24,4 @@ nbdist/
 .nb-gradle/
 /classes/
 
-/src/book_sources
+/src/main/resources/static/book_sources/

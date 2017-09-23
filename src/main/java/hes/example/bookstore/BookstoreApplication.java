@@ -5,12 +5,14 @@ import hes.example.bookstore.domain.security.Role;
 import hes.example.bookstore.domain.security.UserRole;
 import hes.example.bookstore.service.UserService;
 import hes.example.bookstore.utility.SecurityUtility;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +21,9 @@ import java.util.Set;
 public class BookstoreApplication implements CommandLineRunner {
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String createDefaultUsers;
+
+	@Value("${book.store.content}")
+	private String contentDirectory;
 
 	@Autowired
 	private UserService userService;
@@ -56,6 +61,8 @@ public class BookstoreApplication implements CommandLineRunner {
 
 			userService.createUser(user1, userRoles);
 			userService.createUser(admin, adminRoles);
+
+			FileUtils.cleanDirectory(new File(contentDirectory));
 		}
 	}
 }

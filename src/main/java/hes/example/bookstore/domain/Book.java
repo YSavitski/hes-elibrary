@@ -40,10 +40,11 @@ public class Book {
     private String format;
     private int isbn;
     private double shippingWeight;
-    private BigDecimal listPrice;
-    private BigDecimal ourPrice;
+    private BigDecimal listPrice = BigDecimal.valueOf(0.00);
+    private BigDecimal ourPrice = BigDecimal.valueOf(0.00);
     private boolean active=true;
     private int inStockNumber;
+    private boolean hasImage=false;
 
     @Transient
     private MultipartFile bookImage;
