@@ -6,6 +6,14 @@
     <!-- Bootstrap core CSS -->
     <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <!-- Data tables CSS -->
+    <link href="/webjars/datatables/1.10.15/css/jquery.dataTables.min.css"
+          th:href="@{/webjars/datatables/1.10.15/css/jquery.dataTables.min.css}" rel="stylesheet" media="screen"/>
+    <link href="/webjars/datatables/1.10.15/css/dataTables.bootstrap.min.css"
+          th:href="@{/webjars/datatables/1.10.15/css/dataTables.bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <!-- Font Awesome -->
+    <link href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" media="screen"
+          th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"/>
 
     <!-- Custom styles for this template -->
     <link href="/css/adminPortal.css" rel="stylesheet"/>
@@ -59,6 +67,13 @@
             th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
     <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"
             th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+    <script src="/js/bootstrap-filestyle.min.js"></script>
+    <script src="/webjars/tinymce/4.6.5/tinymce.min.js" th:src="@{/webjars/tinymce/4.6.5/tinymce.min.js}"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+    <script src="/webjars/datatables/1.10.15/js/jquery.dataTables.min.js"
+            th:src="@{/webjars/datatables/1.10.15/js/jquery.dataTables.min.js}"></script>
+    <script src="/webjars/datatables/1.10.15/js/dataTables.bootstrap.min.js"
+            th:src="@{/webjars/datatables/1.10.15/js/dataTables.bootstrap.min.js}"></script>
 </div>
 </body>
 </html>

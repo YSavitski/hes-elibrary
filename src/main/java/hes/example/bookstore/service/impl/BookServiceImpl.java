@@ -35,7 +35,7 @@ public class BookServiceImpl implements BookService {
         return bookRepository.save(book);
     }
 
-    private void checkDirectories(String bookId){
+    private void checkDirectoriesAndFiles(String imageName){
         Path pathToBookDirectory = Paths.get(bookContentStorePath);
         if(Files.notExists(pathToBookDirectory)){
             try {
@@ -44,13 +44,18 @@ public class BookServiceImpl implements BookService {
                 e.printStackTrace();
             }
         }
+
+        try {
+            Files.delete(Paths.get(bookContentStorePath.concat(imageName)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void saveBookImage(MultipartFile file, String bookId) {
-
-        checkDirectories(bookId);
         String imageName = bookId.concat(".png");
+        checkDirectoriesAndFiles(imageName);
 
         try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(
                 new File(bookContentStorePath.concat(imageName))))) {
@@ -66,5 +71,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findAllBooks() {
         return (List<Book>) bookRepository.findAll();
+    }
+
+    @Override
+    public Book findOne(String bookId) {
+        return bookRepository.findOne(bookId);
     }
 }

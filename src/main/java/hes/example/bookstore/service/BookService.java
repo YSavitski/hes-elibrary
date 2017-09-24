@@ -11,4 +11,6 @@ public interface BookService {
     void saveBookImage(MultipartFile file, String imageName);
 
     List<Book> findAllBooks();
+
+    Book findOne(String bookId);
 }

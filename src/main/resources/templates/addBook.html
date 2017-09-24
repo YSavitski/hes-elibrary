@@ -132,7 +132,7 @@
                         <div class="col-md-8">
                             <div class="input-group">
                                 <input th:value="${book.shippingWeight}" type="number" name="shippingWeight"
-                                       class="form-control" id="shippingWeight"
+                                       class="form-control" id="shippingWeight" step="0.01"
                                        placeholder="Shipping Weight" />
                                 <span class="input-group-addon">Ounces</span>
                             </div>
@@ -147,7 +147,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
                                 <input th:value="${book.listPrice}" type="number" name="listPrice"
-                                       class="form-control" id="listPrice"
+                                       class="form-control" id="listPrice" step="0.01"
                                        placeholder="List Price" />
                             </div>
                             <span class="help-block">List price of the book</span>
@@ -161,7 +161,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
                                 <input th:value="${book.ourPrice}" type="number" name="ourPrice"
-                                       class="form-control" id="ourPrice"
+                                       class="form-control" id="ourPrice" step="0.01"
                                        placeholder="Our Price" />
                             </div>
                             <span class="help-block">Our price of the book</span>
@@ -204,10 +204,8 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="bookImage">Upload book image</label>
                         <div class="col-md-8">
-                            <label class="btn btn-info">
-                                <span class="glyphicon glyphicon-upload"></span>  Browse...
-                                <input id="bookImage" type="file" style="display: none;" name="bookImage" th:value="${book.bookImage}"/>
-                            </label>
+                            <input id="bookImage" type="file" class="filestyle" data-btnClass="btn-primary" data-buttonBefore="true"
+                                   name="bookImage" th:value="${book.bookImage}"/>
                         </div>
                     </div>
 
@@ -215,7 +213,7 @@
                     <div class="form-group">
                         <div class="col-md-8">
                             <button type="submit" class="btn btn-success">Add Book</button>
-                            <s class="btn btn-danger" th:href="@{/adminportal/}">Cancel</s>
+                            <a class="btn btn-danger" th:href="@{/adminportal/}">Cancel</a>
                         </div>
                     </div>
                 </fieldset>
