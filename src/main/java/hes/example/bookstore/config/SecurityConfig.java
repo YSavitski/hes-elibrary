@@ -18,12 +18,9 @@ import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 
 @Configuration
-@Order(1)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private Environment environment;
 
     @Autowired
     private UserSecurityService userSecurityService;
@@ -40,7 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/home",
             "/newUser",
             "/forgetPassword",
-            "/login"
+            "/login",
+            "/bookshelf",
+            "/bookDetail"
     };
 
     @Override
@@ -59,15 +58,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/?logout").deleteCookies("remember-me").permitAll()
                 .and()
                 .rememberMe();
-
-        /*http
-                .formLogin().loginPage("/adminportal/login")
-                .failureUrl("/adminportal/login?error").defaultSuccessUrl("/adminportal/").permitAll()
-                .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/adminportal/logout"))
-                .logoutSuccessUrl("/adminportal/?logout").deleteCookies("remember-me").permitAll()
-                .and()
-                .rememberMe();*/
     }
 
     @Autowired

@@ -8,14 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdmPortalHomeController {
     private static final String admPath = "/adminportal";
 
-
-    @RequestMapping("/")
+    @RequestMapping(value = {"", "/", "/home"})
     public String index(){
-        return "admportal-home";
-    }
-
-    @RequestMapping("/home")
-    public String home(){
         return "admportal-home";
     }
 }
