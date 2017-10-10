@@ -8,8 +8,6 @@ import java.util.List;
 public interface BookService {
     Book save(Book book);
 
-    void saveBookImage(MultipartFile file, String imageName);
-
     List<Book> findAllBooks();
 
     Book findOne(String bookId);

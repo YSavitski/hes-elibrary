@@ -46,9 +46,6 @@ public class AdmBookController {
             HttpServletRequest request)
     {
         bookService.save(book);
-        if(!book.getBookImage().isEmpty()){
-            bookService.saveBookImage(book.getBookImage(), book.getId());
-        }
         return "redirect:/adminportal/books";
     }
 
@@ -69,11 +66,6 @@ public class AdmBookController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateBook(@ModelAttribute("book") Book book){
         bookService.save(book);
-
-        if(!book.getBookImage().isEmpty()){
-            bookService.saveBookImage(book.getBookImage(), book.getId());
-        }
-
         return "redirect:/adminportal/books/bookInfo?id=".concat(book.getId());
     }
 }

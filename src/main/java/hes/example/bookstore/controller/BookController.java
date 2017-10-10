@@ -5,6 +5,7 @@ import hes.example.bookstore.domain.User;
 import hes.example.bookstore.service.BookService;
 import hes.example.bookstore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +24,15 @@ public class BookController {
     @Autowired
     private UserService userService;
 
+    @Value("${book.store}")
+    private String linkBookSource;
+
     @RequestMapping("/bookshelf")
     public String browseBookshelf(Model model){
         List<Book> books = bookService.findAllBooks();
         model.addAttribute("emptyList", books.isEmpty());
         model.addAttribute("books", books);
+        model.addAttribute("linkBookSource", linkBookSource);
         return "bookshelf";
     }
 

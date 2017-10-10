@@ -44,7 +44,7 @@ public class Book {
     private BigDecimal ourPrice = BigDecimal.valueOf(0.00);
     private boolean active=true;
     private int inStockNumber;
-    private boolean hasImage=false;
+    private boolean hasImage;
 
     @Transient
     private MultipartFile bookImage;

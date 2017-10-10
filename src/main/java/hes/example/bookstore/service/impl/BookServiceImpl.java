@@ -24,36 +24,39 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepository;
 
-    @Value("${book.store.content}")
+    @Value("${book.store}")
     private String bookContentStorePath;
 
     @Override
     public Book save(Book book) {
         if(!book.getBookImage().isEmpty()){
             book.setHasImage(true);
+        } else {
+            book.setHasImage(false);
         }
-        return bookRepository.save(book);
+
+        Book savedBook = bookRepository.save(book);
+        if(savedBook.isHasImage()){
+            saveBookImage(book.getBookImage(), savedBook.getId());
+        }
+        return savedBook;
     }
 
     private void checkDirectoriesAndFiles(String imageName){
         Path pathToBookDirectory = Paths.get(bookContentStorePath);
-        if(Files.notExists(pathToBookDirectory)){
-            try {
-                Files.createDirectories(pathToBookDirectory);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
         try {
-            Files.delete(Paths.get(bookContentStorePath.concat(imageName)));
+            if(Files.notExists(pathToBookDirectory)){
+                Files.createDirectories(pathToBookDirectory);
+            } else {
+                Files.deleteIfExists(Paths.get(bookContentStorePath.concat(imageName)));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    public void saveBookImage(MultipartFile file, String bookId) {
+    private void saveBookImage(MultipartFile file, String bookId) {
         String imageName = bookId.concat(".png");
         checkDirectoriesAndFiles(imageName);
 
