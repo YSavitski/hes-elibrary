@@ -22,7 +22,7 @@ public class BookstoreApplication implements CommandLineRunner {
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String createDefaultUsers;
 
-	@Value("${book.store.content}")
+	@Value("${book.store}")
 	private String contentDirectory;
 
 	@Autowired

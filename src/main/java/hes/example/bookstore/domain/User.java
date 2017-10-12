@@ -19,11 +19,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,12 +33,6 @@ import java.util.Set;
 @Getter @Setter @NoArgsConstructor
 public class User implements Serializable, UserDetails {
     private static final long serialVersionUID = -8988998750688222366L;
-
-    /*@Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(name = "user_id", columnDefinition = "CHAR(32)", updatable = false)
-    private UUID id;*/
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,7 +50,12 @@ public class User implements Serializable, UserDetails {
     private String phone;
     private boolean enabled = true;
 
-    /*@Type(type = "org.hibernate.type.LocalDateTimeType")*/
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<UserShipping> userShippingList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<UserPayment> userPaymentList;
+
     private LocalDateTime created = LocalDateTime.now();
     private LocalDateTime modified;
 

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -19,10 +20,10 @@ import java.util.UUID;
 @Table(name = "books")
 @Data
 @NoArgsConstructor
-public class Book {
+public class Book implements Serializable {
+    private static final long serialVersionUID = -4895857311361205653L;
+
     @Id
-    /*@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;*/
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "book_id")
