@@ -36,7 +36,7 @@ public class UserBilling implements Serializable {
 
     private String country;
 
-    private String zipCode;
+    private String zipcode;
 
     @OneToOne(cascade = CascadeType.ALL)
     private UserPayment userPayment;
